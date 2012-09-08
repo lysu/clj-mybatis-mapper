@@ -23,7 +23,7 @@ On Windows most users can get the batch file. If you have wget.exe or curl.exe a
 
 ## Usage
 
-Run ssh-key-store by:
+Run clj-mybatis-mapper by:
     
   clj-mybatis-mapper [option]
 
