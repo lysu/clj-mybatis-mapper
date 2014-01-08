@@ -116,7 +116,7 @@
                   (.write w (str "     * @param " caml-field " " comment "\n"))
                   (.write w "     */\n")))
               (.write w (str "   public void set" pascal-field  "(" field-type " " caml-field ") {\n"))
-              (.write w (str "        this." caml-field " = " pascal-field ";\n"))
+              (.write w (str "        this." caml-field " = " caml-field ";\n"))
               (.write w "    }\n")))
           (.write w "\n")
           (.write w "}\n'"))))))
