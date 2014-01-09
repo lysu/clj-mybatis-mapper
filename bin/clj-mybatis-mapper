@@ -101,7 +101,7 @@ if [ "$1" = "self-install" ]; then
     echo "Downloading CLJ_MYBATIS_MAPPER now..."
     CLJ_MYBATIS_MAPPER_DIR=`dirname "$CLJ_MYBATIS_MAPPER_JAR"`
     mkdir -p "$CLJ_MYBATIS_MAPPER_DIR"
-    CLJ_MYBATIS_MAPPER_URL="https://github.com/downloads/lysu/clj-mybatis-mapper/clj-mybatis-mapper-$CLJ_MYBATIS_MAPPER_VERSION-standalone.jar"
+    CLJ_MYBATIS_MAPPER_URL="https://github.com/lysu/clj-mybatis-mapper/releases/download/1.0/clj-mybatis-mapper-0.1.0-SNAPSHOT-standalone.jar"
     $HTTP_CLIENT "$CLJ_MYBATIS_MAPPER_JAR" "$CLJ_MYBATIS_MAPPER_URL"
     if [ $? != 0 ]; then
         echo "Failed to download $CLJ_MYBATIS_MAPPER_URL"
