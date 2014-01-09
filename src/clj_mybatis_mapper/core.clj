@@ -119,7 +119,7 @@
               (.write w (str "        this." caml-field " = " caml-field ";\n"))
               (.write w "    }\n")))
           (.write w "\n")
-          (.write w "}\n'"))))))
+          (.write w "}\n"))))))
 
 (defn- concat-name [pack class-name]
   (if pack
@@ -143,14 +143,21 @@
           (.write w "        \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\n")
           (.write w (str "<mapper namespace=\"" caml-name "\">\n"))
           (.write w "\n")
+	        (.write w (str "    <resultMap id=\"" caml-name "Result\"\n")) 
+          (.write w (str "        type=\"" class-name "\">\n"))
+          (doseq [column but-last]
+            (.write w (str "        <result column=\"" (:field column) "\" property=\"" (->caml (:field column))  "\" />\n")))
+          (.write w (str "        <result column=\"" (:field last-item) "\" property=\"" (->caml (:field last-item))  "\" />\n"))
+          (.write w (str "    </resultMap>\n"))
+	        (.write w "\n")
           (.write w "    <select id=\"get\"\n")
           (.write w "        parameterType=\"map\"\n")
-          (.write w (str "        resultType=\"" class-name "\">\n"))
+          (.write w (str "        resultMap=\"" caml-name "Result\">\n"))
           (.write w "        <![CDATA[\n")
           (.write w "            select\n")
           (doseq [column but-last]
-            (.write w (str "              `" (:field column) "` as " (->caml (:field column))  ",\n")))
-          (.write w (str "              `" (:field last-item) "` as " (->caml (:field last-item))  "\n"))
+            (.write w (str "              `" (:field column) "`,\n")))
+          (.write w (str "              `" (:field last-item) "`\n"))
           (.write w "            from \n")
           (.write w (str "                `" (:name table) "`\n"))
           (.write w "        ]]>\n")
